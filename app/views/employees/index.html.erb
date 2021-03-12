@@ -1,0 +1,14 @@
+<h1>Employees</h1>
+<%= link_to "Add New Employee", new_employee_path %>
+<ol>
+    <% @employees.each do |emp| %>
+        <li>
+            <%= emp.name %> 
+            <%= emp.trigram %>
+            <%= emp.email %>
+            <%= link_to "Show details about #{emp.name}", emp %>
+        </li>
+    <% end %>
+</ol>
+
+

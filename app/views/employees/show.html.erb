@@ -1,0 +1,55 @@
+<h1> <%= @employee.name %> </h1>
+<h2> Personal Details </h2>
+<h4> Trigram: <%= @employee.trigram %> </h4>
+<h4> Email id: <%= @employee.email %> </h4>
+<h4> Brand: <%= @employee.brand %> </h4>
+
+
+<ul>
+    <li><%= link_to "Edit Details", edit_employee_path(@employee) %></li>
+    <li><%= link_to "Delete Employee",employee_path(@employee),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+</ul>
+<h2>Add New Task</h2>
+<%= form_with model: [ @employee, @employee.tasks.build ] do |form| %>
+    <p>
+      <%= form.label :title%><br>
+      <%= form.text_field :title%>
+    </p>
+    <p>
+      <%= form.label :reward_point %><br>
+      <%= form.text_area :reward_point %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+<% end %>
+
+
+<h2>Tasks History</h2>
+<table>
+  <tr>
+    <th>Task &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</th>
+    <th>Reward Points &nbsp; &nbsp; &nbsp</th>
+    <th>Action &nbsp; &nbsp; &nbsp</th>
+  </tr>
+  <% @employee.tasks.each do |task| %>
+    <tr>
+        <td>
+            <%= task.title%>
+        </td>
+  
+        <td>
+            <%= task.reward_point %>
+        </td>
+
+        <td>
+            <%= link_to 'Delete Task', [task.employee, task],
+                method: :delete,
+                data: { confirm: "Are you sure?" } 
+            %>
+        </td>
+    </tr>
+   <% end %>
+</table>
